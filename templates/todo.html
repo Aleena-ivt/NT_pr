@@ -4,13 +4,13 @@
 <main class="container">
     <hr>
     <section class="container-fluid">
-        <form method="post" action="/todo">
+        <form method="post" action="/todo" onsubmit="return validateForm()">
             <div class="col-auto">
                 <div class="input-group mb-3">
-                    <input type="text" name="item" value="{{ item }}"
+                    <input type="text" name="item" id="item-input" value="{{ item }}"
                            class="form-control"
                            placeholder="Purchase Packt's Python workshop course"
-                           aria-label="Add a todo">
+                           aria-label="Add a todo" required>
                     <button class="btn btn-outline-primary" type="submit">Add Todo</button>
                 </div>
             </div>
@@ -39,4 +39,13 @@
     </section>
     {% endif %}
 </main>
+<script>
+    function validateForm() {
+        const item = document.getElementById("item-input").value.trim();
+        if (item === "") {
+            return false;
+        }
+        return true;
+    }
+</script>
 {% endblock %}

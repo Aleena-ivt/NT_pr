@@ -1,15 +1,14 @@
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from fastapi import Form
-
-
 class Todo(BaseModel):
     id: Optional[int] = None
-    item: str
+    item: str = Field(..., min_length=1)
 
     @classmethod
-    def as_form(cls, item: str = Form(...)):
+    def as_form(cls, item: str = Form(..., min_length=1)):
         return cls(item=item)
+
 
 
 class TodoItem(BaseModel):
